@@ -1,0 +1,110 @@
+.admin-profile {
+    display: flex;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: rgb(233, 235, 238);
+}
+
+.admin__error {
+    position: absolute;
+    font-size: 30px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #7c704d;
+    width: 350px;
+    font-size: 30px;
+    top: -75px;
+    left: 400px;
+}
+
+.admin__no-info {
+    font-size: 30px;
+    text-align: center;
+    color: #312b0b;
+}
+
+.admin-container {
+    width: 70%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #e0c983;
+}
+
+/* Стили шапки для профиля пользователя*/
+.admin-container__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.admin-container__header__face-profile {
+    display: flex;
+    height: 48px;
+    /*flex-grow: 1;*/
+}
+
+.profile-login {
+    margin: 0 10px;
+}
+
+.admin-container__header__title {
+   /* flex-grow: 3;*/
+    width: 450px;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    line-height: normal;
+    font-weight: 700;
+    color: #b59f5b;
+}
+
+.admin-container__header__load-file {
+    position: relative;
+    width: 150px;
+    /*flex-grow: 2;*/
+}
+
+.admin-sidebar {
+    width: 30%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: normal;
+    font-weight: 700;
+    color: #b59f5b;
+    background-color: #7c704d;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.admin-container__boxes {
+    display: flex;
+    flex-wrap: wrap;
+    /*column-gap: 20px;
+    row-gap: 10px;*/
+    gap: 20px;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 100%;
+    min-height: 602px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: normal;
+    font-weight: 400;
+    color: #534727;
+    background-color: #b59f5b;
+    margin-top: 10px;
+}
+
+.buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.button__admin {
+    font-size: 15px;
+}

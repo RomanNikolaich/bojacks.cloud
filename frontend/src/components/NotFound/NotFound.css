@@ -1,0 +1,8 @@
+.not-found {
+    display: flex;
+    position: relative;
+    height: 700px;
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: rgb(233, 235, 238);
+}

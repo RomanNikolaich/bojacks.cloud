@@ -1,0 +1,64 @@
+.modal-load-file {
+    display: block;
+    box-sizing: border-box;
+    position: fixed;
+    background-color: #12252c;
+    opacity: 0.95;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+}
+
+.modal-load-form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 400px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(65, 62, 58);
+    box-sizing: border-box;
+    padding: 5px;
+}
+
+.modal-load-form-title {
+    margin: 0;
+    color: #b59f5b;
+    font-size: 23px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.file-load-textarea {
+    resize: none;
+    border-radius: 10px;
+}
+
+.file-load-textarea:focus {
+    outline: 2px solid rgb(231, 122, 49);
+}
+
+.button-box {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 10px 20px 10px;
+}
+
+.modal-load-form-size {
+    display: flex;
+    margin: 3px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: normal;
+    font-weight: 700;
+    color: #b59f5b;
+    text-align: start;
+}
+
+.size-result {
+    margin-left: 10px;
+}

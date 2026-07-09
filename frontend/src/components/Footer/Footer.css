@@ -1,0 +1,13 @@
+.footer {
+    display: flex;
+    justify-content: space-around;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: normal;
+    color: #b59f5b;
+    font-size: 20px;
+    background-color: rgb(233, 235, 238);
+}
+
+.footer-box__el {
+    margin: 5px 0;
+}

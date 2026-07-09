@@ -1,0 +1,76 @@
+.information {
+    /*white-space: normal;*/
+    width: 300px;
+    box-sizing: border-box;
+    text-align: start;
+    padding: 5px;
+}
+
+.information-brick {
+   display: flex;
+   flex-wrap: wrap;
+   margin: 10px 0;
+}
+
+.information-brick__title {
+   margin-right: 3px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.button__admin {
+    width: 130px;
+}
+
+.button__delete-file, .button__download-file, .button__open-file, .button__change-file {
+    width: 130px;
+}
+
+.from-db {
+    color: #534727;
+    overflow-wrap: break-word;
+}
+
+.comment {
+    box-sizing: border-box;
+    border: 1px solid #b59f5b;
+    padding: 3px;
+}
+
+.special-link {
+    position: relative;
+    width: 100%;
+    overflow-wrap: break-word;
+    cursor: pointer;
+}
+
+.copied {
+    position: absolute;
+    width: 250px;
+    height: 80px;
+    font-size: 30px;
+    color: #b59f5b;
+    background-color: #534727;
+    top: -5px;
+    left: 0px;
+
+}
+
+.name {
+    width: 100%;
+    overflow-wrap: break-word;
+}
+
+.button__admin {
+    font-size: 15px;
+}
+
+.information__error {
+    margin-top: 50px;
+    font-size: 30px;
+    text-align: center;
+    color: #534727;
+}

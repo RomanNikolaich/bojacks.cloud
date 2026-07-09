@@ -1,0 +1,32 @@
+.file-card {
+    width: 70px;
+    height: 160px;
+    box-sizing: border-box;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.file-card__active {
+    width: 70px;
+    height: 100px;
+    box-sizing: border-box;
+    padding: 5px;
+    cursor: pointer;
+    border: 2px solid #b59f5b;
+}
+
+.file-card__img {
+    width: 60px;
+    height: 60px;
+}
+
+.file-card__name {
+    width: 100%;
+    height: 20px;
+    overflow-wrap: break-word;
+}
+
+.file-card__admnin {
+    color: rgb(65, 62, 58);
+    font-weight: 700;
+}

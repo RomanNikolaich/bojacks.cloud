@@ -1,0 +1,30 @@
+.line {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+}
+
+.line-input {
+    box-sizing: border-box;
+    width: 250px;
+    height: 30px;
+    margin: 0 10px;
+    padding: 0 10px;
+    background-color: rgba(255, 255, 255, 0.452);
+    border: 2px solid rgb(151, 122, 102);
+    border-radius: 30px;
+}
+
+.line-input:focus {
+    outline: 2px solid rgb(231, 122, 49);
+}
+
+.line__title {
+    margin: 3px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    line-height: normal;
+    font-weight: 700;
+    color: #b59f5b;
+}
