@@ -3,6 +3,9 @@
 import { useNavigate } from 'react-router';
 
 import './Header.css';
+import curvedArrow from '../../assets/curved-arrow.png';
+import rusImg from '../../assets/rus.png';
+import espImg from '../../assets/esp.webp';
 
 import { Logo } from '../Logo/Logo';
 import { Button } from '../Button/Button';
@@ -67,14 +70,14 @@ export function Header({ headerClass, toOpenFonLogIn, toOpenFonSignUp }) {
             <div className='change-lang' onClick={onChangeLang}>{lang === 'rus' ? 'Язык интерфейса' : 'Idioma de la interfaz'}
                 <div className='change-LNG'>
                 {lang === 'rus' ? 'ESP' : 'RUS'}
-                    <img className='change-lang__img' src={lang === 'rus' ? "/src/assets/esp.webp" : "/src/assets/rus.png"} alt='lang'/>
+                    <img className='change-lang__img' src={lang === 'rus' ? espImg : rusImg} alt='lang'/>
                 </div>
             </div>
             {/* Если нажато на "Начать полльзоваться" */}
             {beginUse ? 
             <div className='buttons-container'>
                 <div className='greeting-begin-next'>{lang === 'rus' ? 'Войдите или зарегистрируйтесь' : esp.beginUse}
-                    <img className='greeting-begin-next-img' src="/src/assets/curved-arrow.png" alt='BoJack'/></div>
+                    <img className='greeting-begin-next-img' src={curvedArrow} alt='BoJack'/></div>
                 <Button 
                     type={btn.buttonLogInType} 
                     onAction={toOpenFonLogIn} 

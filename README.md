@@ -245,7 +245,6 @@ my-cloud/
 | Frontend | UI-компоненты, роутинг, состояние | [`frontend/README.md`](./frontend/README.md) |
 
 
-
 ## 🚢 Развёртывание в продакшене
 
 В продакшене используется связка **Nginx + Gunicorn**, где Nginx выступает единой точкой входа.
@@ -296,19 +295,19 @@ GRANT ALL PRIVILEGES ON DATABASE my_cloud TO my_cloud_user;
 ### 📥 Шаг 3: Клонирование проекта
 ```bash
 # Перейдите в директорию для проектов
-cd /var/www
+cd ~/bojacks.cloud
 
 # Клонируйте репозиторий
-sudo git clone https://github.com/RomanNikolaich/bojacks.cloud.git my-cloud
-cd my-cloud
+sudo git clone https://github.com/RomanNikolaich/bojacks.cloud.git
+cd bojacks.cloud
 
-# Установка владельца (замените www-data на вашего пользователя)
+'''# Установка владельца (замените www-data на вашего пользователя)
 sudo chown -R www-data:www-data /var/www/my-cloud
 ```
 
 ### ⚙️ Шаг 4: Настройка Backend
 ```bash
-cd /var/www/my-cloud/backend
+cd bojacks.cloud/backend
 
 # Создание виртуального окружения
 python3.11 -m venv venv
@@ -333,19 +332,22 @@ ALLOWED_HOSTS=mycloud.example.com,www.mycloud.example.com
 
 - PostgreSQL
 DB_ENGINE=django.db.backends.postgresql
-DB_NAME=my_cloud_db
+DB_NAME=my_cloud
 DB_USER=my_cloud_user
 DB_PASSWORD=your_secure_password
 DB_HOST=localhost
 DB_PORT=5432
 
 - Файловое хранилище
-MEDIA_ROOT=/var/www/my-cloud/backend/media
+MEDIA_ROOT=/var/www/bojacks.cloud/backend/media
 MEDIA_URL=/media/
 
 ```bash
 # Применение миграций
 python manage.py migrate --noinput
+
+Перейти в bojacks.cloud/backend/config/settings.py и добавить STATIC_ROOT = BASE_DIR / 'static'.
+В ALLOWED_HOSTS = [] нужнsq IP-адрес сервера
 
 # Сборка статики Django
 python manage.py collectstatic --noinput
@@ -357,9 +359,10 @@ python manage.py createsuperuser
 deactivate
 ```
 
+
 ### 🎨 Шаг 5: Сборка Frontend
 ```bash
-cd /var/www/my-cloud/frontend
+cd /home/`username`/bojack.cloud/frontend
 
 # Установка Node.js (если не установлен)
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -375,22 +378,22 @@ yarn install
 yarn build
 
 # Установка владельца
-sudo chown -R www-data:www-data /var/www/my-cloud/frontend/dist
+sudo chown -R www-data:www-data /home/`username`/bojack.cloud/frontend/dist
 ```
 
 ### 🔐 Шаг 6: Настройка прав доступа
 ```bash
 # Права на медиа-файлы
-sudo chown -R www-data:www-data /var/www/my-cloud/backend/media
-sudo chmod -R 755 /var/www/my-cloud/backend/media
+sudo chown -R www-data:www-data /home/w`username`ww/bojack.cloud/backend/media
+sudo chmod -R 755 /var/www/bojack.cloud/backend/media
 
 # Права на статику
-sudo chown -R www-data:www-data /var/www/my-cloud/backend/staticfiles
-sudo chmod -R 755 /var/www/my-cloud/backend/staticfiles
+sudo chown -R www-data:www-data /home/`username`/bojack.cloud/backend/staticfiles
+sudo chmod -R 755 /home/`username`/bojack.cloud/backend/staticfiles
 
 # Права на фронтенд
-sudo chown -R www-data:www-data /var/www/my-cloud/frontend/dist
-sudo chmod -R 755 /var/www/my-cloud/frontend/dist
+sudo chown -R www-data:www-data /home/`username`/bojack.cloud/frontend/dist
+sudo chmod -R 755 /var/www/bojack.cloud/frontend/dist
 ```
 
 ### 🚀 Шаг 7: Создание systemd-сервиса для Gunicorn
@@ -403,17 +406,14 @@ Description=Gunicorn daemon for My Cloud
 After=network.target
 
 [Service]
-User=www-data
-Group=www-data
-WorkingDirectory=/var/www/my-cloud/backend
-Environment="PATH=/var/www/my-cloud/backend/venv/bin"
-EnvironmentFile=/var/www/my-cloud/backend/.env
-ExecStart=/var/www/my-cloud/backend/venv/bin/gunicorn \
-          --access-logfile - \
-          --workers 3 \
-          --bind unix:/run/gunicorn.sock \
-          my_cloud_rnikolaich_backend.wsgi:application
-
+User=`username`
+Group=`username`
+WorkingDirectory=/home/`username`/bojack.cloud/backend
+Environment="PATH=/var/www/bojack.cloud/backend/venv/bin"
+EnvironmentFile=/var/www/bojack.cloud/backend/.env
+ExecStart=/home/`username`/bojacks.cloud/backend/env/bin/gunicorn --access-logfile - \
+        --workers 3 --bind unix:/home/`username`/bojacks.cloud/backend/config/project.sock \
+        config.wsgi:application
 Restart=always
 RestartSec=3
 
@@ -431,24 +431,16 @@ sudo systemctl status gunicorn
 
 ### 🌐 Шаг 8: Настройка Nginx
 ```bash
-sudo nano /etc/nginx/sites-available/my-cloud
+sudo nano /etc/nginx/sites-available/bojacks-cloud
 
 # Содержимое файла:
 
 server {
     listen 80;
-    server_name mycloud.example.com www.mycloud.example.com;
+    server_name 194.67.111.246;
 
-    # Путь к фронтенду (сборка Vite)
-    root /var/www/my-cloud/frontend/dist;
-    index index.html;
-
-    # Максимальный размер загружаемых файлов
-    client_max_body_size 100M;
-
-    # 1. API-запросы → прокси на Django
     location /api/ {
-        proxy_pass http://unix:/run/gunicorn.sock;
+        proxy_pass http://unix:/home/`username`/bojacks.cloud/backend/config/project.sock;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -456,30 +448,30 @@ server {
         proxy_read_timeout 300;
     .}
 
-    # 2. Админка Django → прокси на Django
     location /admin/ {
-        proxy_pass http://unix:/run/gunicorn.sock;
+        proxy_pass http://unix:/home/`username`/bojacks.cloud/backend/config/project.sock;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
     .}
 
-    # 3. Статика Django (админка)
     location /static/ {
-        alias /var/www/my-cloud/backend/staticfiles/;
-        expires 30d;
+        alias /home/`username`/bojacks.cloud/backend/static/;
+    .}
+
+    location /media/ {
+        alias /home/`username`/bojacks.cloud/backend/media/;
+    .}
+
+    location /assets/ {
+        alias /home/`username`/bojacks.cloud/frontend/dist/assets/;
+        expires 1y;
         add_header Cache-Control "public, immutable";
     .}
 
-    # 4. Медиафайлы (загруженные пользователями)
-    location /media/ {
-        alias /var/www/my-cloud/backend/media/;
-        expires 7d;
-    .}
-
-    # 5. Всё остальное → фронтенд (SPA)
     location / {
+        root /home/`username`/bojacks.cloud/frontend/dist;
         try_files $uri $uri/ /index.html;
     .}
 .}

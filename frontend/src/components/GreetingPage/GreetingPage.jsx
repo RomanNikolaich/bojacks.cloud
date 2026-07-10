@@ -6,6 +6,9 @@ import { Button } from '../Button/Button';
 
 import { buttonData as btn } from '../DataForAllApp'
 import { esp } from '../EPSDataForAllApp';
+import boJack1 from '../../assets/1.jpg';
+import boJack2 from '../../assets/2.jpg';
+import boJack3 from '../../assets/3.webp';
 
 import { useIsBeginUse, useBeginUseState } from '../../store/useStoreFalseToTrue';
 import { useLangStore } from '../../store/langStore';
@@ -28,12 +31,12 @@ export function GreetingPage() {
                     {lang === 'rus' ? 'Простой и удобный обачный сервис для хранения файлов' : 
                     'Servicio en la nube simple y conveniente para almacenar archivos'}
                 </div>
-                <img className='greeting-img' src="/src/assets/1.jpg" alt='BoJack'/>
+                <img className='greeting-img' src={boJack1} alt='BoJack'/>
                 <div className='greeting-text'>
                     {lang === 'rus' ? 'Полностью бесплатный' : 'Totalmente gratis'}
                 </div>
-                <img className='greeting-img' src="/src/assets/2.jpg" alt='BoJack'/>
-                <img className='greeting-img' src="/src/assets/3.webp" alt='BoJack'/>
+                <img className='greeting-img' src={boJack2} alt='BoJack'/>
+                <img className='greeting-img' src={boJack3} alt='BoJack'/>
                 <div className='greeting-text'>
                     {lang === 'rus' ? '... и безопасный!' : '... ¡y seguro!'}
                 </div>

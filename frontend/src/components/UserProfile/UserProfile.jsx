@@ -4,6 +4,7 @@ import { useNavigate, useParams, useLocation, Navigate } from 'react-router';
 import { useRef, useCallback, useEffect, useState } from 'react';
 
 import './UserProfile.css';
+import profileImg from '../../assets/profile.jpg';
 
 import { Button } from '../Button/Button';
 import { FileCard } from '../Cards/FileCard';
@@ -116,7 +117,7 @@ export function UserProfile() {
             <div className='file-container'>
                 <div className='file-container__header'>
                     <div className='file-container__header__face-profile'>
-                        <img className='profile-img' src='/src/assets/profile.jpg' alt='user'/>
+                        <img className='profile-img' src={profileImg} alt='user'/>
                         <p className='profile-login'>{user?.username}</p>
                     </div>
                     <h3 className='file-container__header__title'>{lang === 'rus' ? 'Ваши файлы' : 'Sus archivos'}</h3>

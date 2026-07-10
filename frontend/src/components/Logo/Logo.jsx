@@ -2,9 +2,10 @@
 
 import './Logo.css';
 
+import logo from '../../assets/logo.png';
 
 export function Logo() {
     return (
-        <img className='logo' src="/src/assets/logo.png" alt='Logo'/>
+        <img className='logo' src={logo} alt='Logo'/>
     )
 };
