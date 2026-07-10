@@ -156,8 +156,16 @@ export function UserInformation() {
             } catch (error) {
                 console.error('Ошибка загрузки файлов:', error);
             }
-        }
+        };
     };
+    
+    let admin = !getUserInfo.is_staff 
+        ? (lang === 'rus' ? 'Нет' : 'No') 
+        : (lang === 'rus' ? 'Да' : 'Sí');
+
+    let makeAdmin = !getUserInfo.is_staff 
+        ? (lang === 'rus' ? 'Назначить администратором' : 'Asignar administrador') 
+        : (lang === 'rus' ? 'Сделать пользователем' : 'Hacer usuario');
 
     // Если нет инфомации для рендера данных пользователя - то ничего не рендерим
     if (!getUserInfo.id) return null;
@@ -165,44 +173,44 @@ export function UserInformation() {
     return (
         <div className='information'>
             <div className='information-brick'>
-                <p className='information-brick__title'>Имя пользователя</p>
+                <p className='information-brick__title'>{lang === 'rus' ? 'Имя пользователя:' : 'Nombre de usuario:'}</p>
                 <p className='from-db'>{getUserInfo.first_name}</p>
             </div>
             <div className='information-brick'>
-                <p className='information-brick__title'>Фамилия</p>
+                <p className='information-brick__title'>{lang === 'rus' ? 'Фамилия' : 'Apellido'}</p>
                 <p className='from-db'>{getUserInfo.last_name}</p>
             </div>
             <div className='information-brick'>
-                <p className='information-brick__title'>Логин</p>
+                <p className='information-brick__title'>{lang === 'rus' ? 'Логин' : 'Login'}</p>
                 <p className='from-db username'>{getUserInfo.username}</p>
             </div>
             <div className='information-brick'>
-                <p className='information-brick__title'>Почта</p>
+                <p className='information-brick__title'>{lang === 'rus' ? 'Почта' : 'Correo'}</p>
                 <p className='from-db'>{getUserInfo.email}</p>
             </div>
             <div className='information-brick'>
-                <p className='information-brick__title'>Количество файлов:</p>
+                <p className='information-brick__title'>{lang === 'rus' ? 'Количество файлов:' : 'Número de archivos:'}</p>
                 <p className='from-db'>{getUserInfo.files_count}</p>
             </div>
             <div className='information-brick'>
-                <p className='information-brick__title'>Являестя ли админтратором?</p>
-                <p className='from-db'>{!getUserInfo.is_staff ? 'Нет' : 'Да'}</p>
+                <p className='information-brick__title'>{lang === 'rus' ? 'Являестя ли админтратором?' : '¿Es administrador?'}</p>
+                <p className='from-db'>{admin}</p>
             </div>
             <div className='buttons-container'>
                 <Button 
-                    textButton='Удалить пользователя' 
+                    textButton={lang === 'rus' ? 'Удалить пользователя' : 'Eliminar usuario'}
                     buttonClass={btn.buttonAdminClass} 
                     type={btn.buttonAdminType} 
                     onAction={onDelete} 
                 />
                 <Button 
-                    textButton='Посмтреть файлы' 
+                    textButton={lang === 'rus' ? 'Посмтреть файлы' : 'Ver archivos'}
                     buttonClass={btn.buttonAdminClass} 
                     type={btn.buttonAdminType} 
                     onAction={onDownload} 
                 />
                 <Button 
-                    textButton={!getUserInfo.is_staff ? 'Назначить администратором' : 'Сделать пользователем'}
+                    textButton={makeAdmin}
                     buttonClass={btn.buttonAdminClass} 
                     type={btn.buttonAdminType} 
                     onAction={onChangeStatusUser} 
